@@ -75,7 +75,6 @@ int main(int argc, char *argv[])
     {
         displayMenu(drinks);
         daily_total = 0;
-        // hard coded size
         for (int i = 0; i < employee_count; i++)
         {
             cout << arr[i].getName() << " orders: ";
