@@ -92,7 +92,7 @@ int main(int argc, char *argv[])
             cout << "=====" << endl;
         }
         Person bill_footer = dueToPay(arr, employee_count);
-        cout <<"Today's bill will be paid by "<< bill_footer.getName() << ", with a debt of $" << bill_footer.getBalanceOwed() << endl;
+        cout <<"Today's bill will be paid by "<< bill_footer.getName() << ", with the largest outstanding debt of: $" << bill_footer.getBalanceOwed() << endl;
         cout << "The bill comes out to: $" << daily_total << endl;
         for (int j = 0; j < employee_count; j++)
         {
@@ -100,7 +100,7 @@ int main(int argc, char *argv[])
             {
                 // if bill footer matches arr index
                 arr[j].setBalanceOwed(arr[j].getBalanceOwed() - daily_total);
-                cout << arr[j].getName() << "'s new debt is: " << arr[j].getBalanceOwed() << endl;
+                cout << arr[j].getName() << "'s new debt is: $" << arr[j].getBalanceOwed() << endl;
                 break;
             }
         }
