@@ -1,9 +1,9 @@
-Black Coffee,2.00,3.00,4.00
-Cappuccino,2.50,3.00,3.50
-Mocha,3.00,4.00,5.00
-Latte,3.00,3.50,4.00
-Black Tea,2.00,3.00,4.00
-Green Tea,2.00,3.00,4.00
-Hot Chocolate,4.00,5.00,5.50
-Frappuccino,5.00,6.50,7.00
-Iced Coffee,2.00,3.00,4.00
+Black Coffee|2.00,3.00,4.00
+Cappuccino|2.50,3.00,3.50
+Mocha|3.00,4.00,5.00
+Latte|3.00,3.50,4.00
+Black Tea|2.00,3.00,4.00
+Green Tea|2.00,3.00,4.00
+Hot Chocolate|4.00,5.00,5.50
+Frappuccino|5.00,6.50,7.00
+Iced Coffee|2.00,3.00,4.00

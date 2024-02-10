@@ -5,7 +5,6 @@ Person::Person(){ //default construct
     _drink_of_choice = coffee();
     _drink_size = '0';
     _drink_price = 0;
-    _balance_paid = 0;
     _balance_owed = 0;
 }
 Person::Person(string name){//paramaterized w/ name
@@ -13,7 +12,6 @@ Person::Person(string name){//paramaterized w/ name
     _drink_of_choice = coffee();
     _drink_size = '0';
     _drink_price = 0;
-    _balance_paid = 0;
     _balance_owed = 0;
 }
 Person::Person(string name, coffee drink_of_choice, char drink_size){//with name & drink pref
@@ -32,9 +30,14 @@ Person::Person(string name, coffee drink_of_choice, char drink_size){//with name
     else{
         _drink_price = 0;
     }
-    _drink_price = 0;
-    _balance_paid = 0;
-    _balance_paid = 0;
+    _balance_owed = 0;
+}
+
+string Person::getName() const{
+    return _name;
+}
+void Person::setName(string name){
+    _name = name;
 }
 
 coffee Person::getDrinkOfChoice() const{
@@ -64,13 +67,6 @@ void Person::setDrinkPrice(char drink_size){
     else if(drink_size == 'L'){
         _drink_price = _drink_of_choice.l_price;
     }
-}
-
-double Person::getBalancePaid() const{
-    return _balance_paid;
-}
-void Person::setBalancePaid(double balance_paid){
-    _balance_paid = balance_paid;
 }
 
 double Person::getBalanceOwed() const{

@@ -21,12 +21,14 @@ class Person{
         coffee _drink_of_choice;
         char _drink_size;
         double _drink_price;
-        double _balance_paid; //how much they paid on their designated day
         double _balance_owed; //total cost of the drinks they have purchased
     public:
         Person();
         Person(string);
         Person(string, coffee, char);
+
+        string getName() const;
+        void setName(string);
 
         coffee getDrinkOfChoice() const;
         void setDrinkOfChoice(coffee);
@@ -37,14 +39,8 @@ class Person{
         double getDrinkPrice() const;
         void setDrinkPrice(char);
 
-        double getBalancePaid() const;
-        void setBalancePaid(double);
-
         double getBalanceOwed() const;
         void setBalanceOwed(double);
-
-        //double calculate
-
 };
 
 #endif
