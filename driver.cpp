@@ -27,7 +27,8 @@ int main(int argc, char *argv[])
         readFile(in_file, drinks);
     }
     double daily_total;
-    char size;
+    char size; //drink size (S)mall, (M)edium, (L)arge
+    cout<<endl;
     cout << "Welcome to BertramBucks!" << endl;
     displayMenu(drinks);
 
@@ -47,10 +48,11 @@ int main(int argc, char *argv[])
         }
         else
         {
-            cout << "What is your name?" << endl;
+            displayMenu(drinks);
+            temp.setDrinkOfChoice(findDrink(drinks, x));
+            cout << "Can I get a name for the order?" << endl;
             getline(cin, emp_name);
             temp.setName(emp_name);
-            temp.setDrinkOfChoice(findDrink(drinks, x));
         }
         cout << "What size would you like?" << endl;
         cout << "S/M/L" << endl;
@@ -58,7 +60,7 @@ int main(int argc, char *argv[])
         size = toupper(size);
         while (cin.fail() || (size != 'S' && size != 'M' && size != 'L'))
         {
-            cout << "invalid input" << endl;
+            cout << "Invalid input! " << endl;
             if (cin.fail())
             {
                 cin.clear();
@@ -80,18 +82,18 @@ int main(int argc, char *argv[])
             cout << arr[i].getName() << " orders: ";
             cout << arr[i].getDrinkOfChoice().drink;
             cout << " (" << arr[i].getDrinkSize() << ")" << endl;
-            arr[i].setDrinkPrice(arr[i].getDrinkSize());
-            cout << "Drink price: " << arr[i].getDrinkPrice() << endl;
-            daily_total += arr[i].getDrinkPrice();
+            arr[i].setDrinkPrice(arr[i].getDrinkSize()); //set person's drink price based on selected size
+            cout << "Drink price: $" << arr[i].getDrinkPrice() << endl;
+            daily_total += arr[i].getDrinkPrice(); //add person's order to the day's total bill
 
             // set balance owed to previous amount owed + price of drink
             arr[i].setBalanceOwed(arr[i].getBalanceOwed() + arr[i].getDrinkPrice());
-            cout << "Balance owed: " << arr[i].getBalanceOwed() << endl;
+            cout << "Balance owed: $" << arr[i].getBalanceOwed() << endl;
             cout << "=====" << endl;
         }
         Person bill_footer = dueToPay(arr, employee_count);
-        cout << bill_footer.getName() << " is due to pay for today with a debt of " << bill_footer.getBalanceOwed() << endl;
-        cout << "Today's bill comes out to: " << daily_total << endl;
+        cout <<"Today's bill will be paid by "<< bill_footer.getName() << ", with a debt of $" << bill_footer.getBalanceOwed() << endl;
+        cout << "The bill comes out to: $" << daily_total << endl;
         for (int j = 0; j < employee_count; j++)
         {
             if (bill_footer.getName() == arr[j].getName() && bill_footer.getDrinkOfChoice().drink == arr[j].getDrinkOfChoice().drink && bill_footer.getDrinkSize() == arr[j].getDrinkSize())
@@ -131,12 +133,13 @@ void displayMenu(vector<coffee> drinks)
             maxsize = drinks.at(x + 1).drink.length();
         }
     }
-    cout << left << setw(maxsize + 5) << "Name" << setw(10) << "Small" << setw(10) << "Medium" << setw(10) << "Large" << endl;
+    cout<<"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"<<endl;
+    cout << left << setw(maxsize + 5) << "" << setw(10) << "Small" << setw(10) << "Medium" << setw(10) << "Large" << endl;
     for (int i = 0; i < size; i++)
     {
         cout << left << setw(maxsize + 5) << drinks.at(i).drink << fixed << setprecision(2) << "$" << setw(9) << drinks.at(i).s_price << "$" << setw(9) << drinks.at(i).m_price << "$" << setw(9) << drinks.at(i).l_price << endl;
     }
-    cout << "=====" << endl;
+    cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
     return;
 }
 void readFile(ifstream &in_file, vector<coffee> &drinks)
@@ -199,7 +202,7 @@ coffee findDrink(vector<coffee> drinks, int index)
         }
         if (i == vec_size - 1)
         { // if every index of the vector has been checked
-            cout << ". Drink not found! Please enter a valid drink name" << endl;
+            cout << "Sorry we don't sell that here! Please enter a valid drink name." << endl;
             getline(cin, drink);
             drink_length = drink.length();
             drink_order = "";
