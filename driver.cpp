@@ -119,7 +119,9 @@ int main(int argc, char *argv[])
 void displayMenu(vector<coffee> drinks)
 {
     int size = drinks.size();
-    int maxsize = drinks.at(0).drink.length();
+    //int maxsize = drinks.at(0).drink.length();
+    int msize = drinks.at(0).drink.length();
+    unsigned int maxsize = static_cast<unsigned int>(msize);
     for (int x = 0; x < size - 1; x++)
     {
         if (drinks.at(x + 1).drink.length() > maxsize)
