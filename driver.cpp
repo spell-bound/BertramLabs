@@ -3,7 +3,7 @@
 void displayMenu(vector<coffee>);
 void readFile(ifstream &, vector<coffee> &);
 coffee findDrink(vector<coffee>, int);
-Person dueToPay(Person arr[], const int employee_count);
+int dueToPay(Person arr[], const int employee_count);
 
 int main(int argc, char *argv[])
 {
@@ -73,7 +73,8 @@ int main(int argc, char *argv[])
         temp.setDrinkSize(size);
         arr[x] = temp;
     }
-    while (true)
+    bool loop = true;
+    do
     {
         displayMenu(drinks);
         daily_total = 0;
@@ -91,19 +92,12 @@ int main(int argc, char *argv[])
             cout << "Balance owed: $" << arr[i].getBalanceOwed() << endl;
             cout << "=====" << endl;
         }
-        Person bill_footer = dueToPay(arr, employee_count);
-        cout <<"Today's bill will be paid by "<< bill_footer.getName() << ", with the largest outstanding debt of: $" << bill_footer.getBalanceOwed() << endl;
+        int bill_footer = dueToPay(arr, employee_count);
+        cout <<"Today's bill will be paid by "<< arr[bill_footer].getName() << ", with the largest outstanding debt of: $" << arr[bill_footer].getBalanceOwed() << endl;
         cout << "The bill comes out to: $" << daily_total << endl;
-        for (int j = 0; j < employee_count; j++)
-        {
-            if (bill_footer.getName() == arr[j].getName() && bill_footer.getDrinkOfChoice().drink == arr[j].getDrinkOfChoice().drink && bill_footer.getDrinkSize() == arr[j].getDrinkSize())
-            {
-                // if bill footer matches arr index
-                arr[j].setBalanceOwed(arr[j].getBalanceOwed() - daily_total);
-                cout << arr[j].getName() << "'s new debt is: $" << arr[j].getBalanceOwed() << endl;
-                break;
-            }
-        }
+        arr[bill_footer].setBalanceOwed(arr[bill_footer].getBalanceOwed() - daily_total);
+        cout << arr[bill_footer].getName() << "'s new debt is: $" << arr[bill_footer].getBalanceOwed() << endl;
+        
         string more_coffee;
         cout << "Another day of coffee?" << endl;
         cout << "Yes/No" << endl;
@@ -116,9 +110,9 @@ int main(int argc, char *argv[])
         if (more_coffee == "No")
         {
             cout << "Thanks for playing!" << endl;
-            break;
+            loop = false;
         }
-    }
+    } while(loop == true);
     return 0;
 }
 
@@ -215,7 +209,7 @@ coffee findDrink(vector<coffee> drinks, int index)
     }
     return coffee();
 }
-Person dueToPay(Person arr[], const int employee_count)
+int dueToPay(Person arr[], const int employee_count)
 {
     // returns person with largest debt
     // if multiple people have the same balance owed
@@ -230,5 +224,6 @@ Person dueToPay(Person arr[], const int employee_count)
             index = i + 1;
         }
     }
-    return arr[index];
+    cout<<"index: "<<index<<endl;
+    return index;
 }
