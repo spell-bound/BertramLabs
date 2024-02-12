@@ -55,12 +55,18 @@ int main(int argc, char *argv[])
             temp.setName(emp_name);
         }
         cout << "What size would you like?" << endl;
-        cout << "S/M/L" << endl;
-        cin >> size;
+        cout << "Enter: (S) for small | (M) for medium | (L) for large." << endl;
+        string size_str;
+        cin>>size_str;
+        while(size_str.length() != 1){
+            cout<<"Must be a single character input! (S)mall | (M)edium | (L)arge."<<endl;
+            cin>>size_str;
+        }
+        size = size_str[0];
         size = toupper(size);
         while (cin.fail() || (size != 'S' && size != 'M' && size != 'L'))
         {
-            cout << "Invalid input! " << endl;
+            cout << "Invalid input! (S)mall | (M)edium | (L)arge." << endl;
             if (cin.fail())
             {
                 cin.clear();
@@ -92,7 +98,7 @@ int main(int argc, char *argv[])
             cout << "Balance owed: $" << arr[i].getBalanceOwed() << endl;
             cout << "=====" << endl;
         }
-        int bill_footer = dueToPay(arr, employee_count);
+        int bill_footer = dueToPay(arr, employee_count); //array index corresponding to who will be paying
         cout <<"Today's bill will be paid by "<< arr[bill_footer].getName() << ", with the largest outstanding debt of: $" << arr[bill_footer].getBalanceOwed() << endl;
         cout << "The bill comes out to: $" << daily_total << endl;
         arr[bill_footer].setBalanceOwed(arr[bill_footer].getBalanceOwed() - daily_total);
@@ -119,7 +125,6 @@ int main(int argc, char *argv[])
 void displayMenu(vector<coffee> drinks)
 {
     int size = drinks.size();
-    //int maxsize = drinks.at(0).drink.length();
     int msize = drinks.at(0).drink.length();
     unsigned int maxsize = static_cast<unsigned int>(msize);
     for (int x = 0; x < size - 1; x++)
@@ -226,6 +231,5 @@ int dueToPay(Person arr[], const int employee_count)
             index = i + 1;
         }
     }
-    cout<<"index: "<<index<<endl;
     return index;
 }
