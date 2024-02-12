@@ -7,10 +7,13 @@ Welcome to my solution for the coffee bill dilemma! The program starts by assumi
 To ensure the menu displays as intended, run the program in full screen.
 
 TO COMPILE:
+
 g++ -Wall -Werror -Wpedantic -std=c++17 driver.cpp coffeeBreak.cpp
 
 THEN RUN EITHER (macOS): 
+
 ./a.out menu.txt
 
-OR RUN (Windows): 
+OR RUN (Windows):
+
 ./a.exe menu.txt
