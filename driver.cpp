@@ -27,8 +27,8 @@ int main(int argc, char *argv[])
         readFile(in_file, drinks);
     }
     double daily_total;
-    char size; //drink size (S)mall, (M)edium, (L)arge
-    cout<<endl;
+    char size; // drink size (S)mall, (M)edium, (L)arge
+    cout << endl;
     cout << "Welcome to BertramBucks!" << endl;
     displayMenu(drinks);
 
@@ -38,12 +38,12 @@ int main(int argc, char *argv[])
         string emp_name = "";
         if (x == 0)
         {
-            temp.setName("Bob");// output the drink they always get
+            temp.setName("Bob"); // output the drink they always get
             temp.setDrinkOfChoice(findDrink(drinks, x));
         }
         else if (x == 1)
         {
-            temp.setName("Jeremy");// output the drink they always get
+            temp.setName("Jeremy"); // output the drink they always get
             temp.setDrinkOfChoice(findDrink(drinks, x));
         }
         else
@@ -57,10 +57,11 @@ int main(int argc, char *argv[])
         cout << "What size would you like?" << endl;
         cout << "Enter: (S) for small | (M) for medium | (L) for large." << endl;
         string size_str;
-        cin>>size_str;
-        while(size_str.length() != 1){
-            cout<<"Must be a single character input! (S)mall | (M)edium | (L)arge."<<endl;
-            cin>>size_str;
+        cin >> size_str;
+        while (size_str.length() != 1)
+        {
+            cout << "Must be a single character input! (S)mall | (M)edium | (L)arge." << endl;
+            cin >> size_str;
         }
         size = size_str[0];
         size = toupper(size);
@@ -89,36 +90,48 @@ int main(int argc, char *argv[])
             cout << arr[i].getName() << " orders: ";
             cout << arr[i].getDrinkOfChoice().drink;
             cout << " (" << arr[i].getDrinkSize() << ")" << endl;
-            arr[i].setDrinkPrice(arr[i].getDrinkSize()); //set person's drink price based on selected size
+            arr[i].setDrinkPrice(arr[i].getDrinkSize()); // set person's drink price based on selected size
             cout << "Drink price: $" << arr[i].getDrinkPrice() << endl;
-            daily_total += arr[i].getDrinkPrice(); //add person's order to the day's total bill
+            daily_total += arr[i].getDrinkPrice(); // add person's order to the day's total bill
 
             // set balance owed to previous amount owed + price of drink
             arr[i].setBalanceOwed(arr[i].getBalanceOwed() + arr[i].getDrinkPrice());
             cout << "Balance owed: $" << arr[i].getBalanceOwed() << endl;
             cout << "=====" << endl;
         }
-        int bill_footer = dueToPay(arr, employee_count); //array index corresponding to who will be paying
-        cout <<"Today's bill will be paid by "<< arr[bill_footer].getName() << ", with the largest outstanding debt of: $" << arr[bill_footer].getBalanceOwed() << endl;
+        int bill_footer = dueToPay(arr, employee_count); // array index corresponding to who will be paying
+        cout << "Today's bill will be paid by " << arr[bill_footer].getName() << ", with the largest outstanding debt of: $" << arr[bill_footer].getBalanceOwed() << endl;
         cout << "The bill comes out to: $" << daily_total << endl;
         arr[bill_footer].setBalanceOwed(arr[bill_footer].getBalanceOwed() - daily_total);
         cout << arr[bill_footer].getName() << "'s new debt is: $" << arr[bill_footer].getBalanceOwed() << endl;
-        
-        string more_coffee;
+
+        string more_coffee, mc;
         cout << "Another day of coffee?" << endl;
         cout << "Yes/No" << endl;
-        getline(cin, more_coffee);
-        while (more_coffee != "Yes" && more_coffee != "No")
+        getline(cin, mc);
+        int more_length = mc.length();
+        more_coffee = "";
+        for (int k = 0; k < more_length; k++)
+        { // convert input to uppercase
+            more_coffee += toupper(mc[k]);
+        }
+        while (more_coffee != "YES" && more_coffee != "NO")
         {
             cout << "Invalid input. Please enter 'Yes' to continue or 'No' to end the program." << endl;
-            getline(cin, more_coffee);
+            getline(cin, mc);
+            more_length = mc.length();
+            more_coffee = "";
+            for (int k = 0; k < more_length; k++)
+            { // convert input to uppercase
+                more_coffee += toupper(mc[k]);
+            }
         }
-        if (more_coffee == "No")
+        if (more_coffee == "NO")
         {
             cout << "Thanks for playing!" << endl;
             loop = false;
         }
-    } while(loop == true);
+    } while (loop == true);
     return 0;
 }
 
@@ -134,7 +147,7 @@ void displayMenu(vector<coffee> drinks)
             maxsize = drinks.at(x + 1).drink.length();
         }
     }
-    cout<<"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"<<endl;
+    cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
     cout << left << setw(maxsize + 5) << "" << setw(10) << "Small" << setw(10) << "Medium" << setw(10) << "Large" << endl;
     for (int i = 0; i < size; i++)
     {
