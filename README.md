@@ -11,11 +11,6 @@ TO COMPILE:
 g++ -Wall -Werror -Wpedantic -std=c++17 driver.cpp coffeeBreak.cpp
 
 
-THEN RUN EITHER (macOS): 
+TO RUN: 
 
 ./a.out menu.txt
-
-
-OR RUN (Windows):
-
-./a.exe menu.txt
